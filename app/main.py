@@ -13,7 +13,7 @@ def main():
 
     with conn:
         conn.recv(1024)
-        conn.send(b"+OK\r\n")
+        conn.send(b"+PONG\r\n")
 
 
 if __name__ == "__main__":
