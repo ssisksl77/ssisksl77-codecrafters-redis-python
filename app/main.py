@@ -12,8 +12,11 @@ def main():
     conn, _ = server_socket.accept() # wait for client
 
     with conn:
-        conn.recv(1024)
-        conn.send(b"+PONG\r\n")
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.send(b"+PONG\r\n")
 
 
 if __name__ == "__main__":
