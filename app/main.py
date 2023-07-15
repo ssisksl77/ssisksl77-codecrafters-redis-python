@@ -1,23 +1,31 @@
 # Uncomment this to pass the first stage
 import socket
-from concurrent.futures import ThreadPoolExecutor
+import asyncio
 
-def reply(c):
-    while True:
-        if not c.recv(1024):
-            break
-        c.send(bytes("+PONG\r\n", "utf-8"))
-    print("Client disconnected")
 
-def main():
+PORT = 6379
+HOST = "localhost"
+
+async def main():
     print("Logs from your program will appear here!")
 
-    server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
-    threadPoolExecutor = ThreadPoolExecutor(max_workers=3)
+    # use asyncio to start a socket server
+    # # then call an async function to return PONG
+    server = await asyncio.start_server(
+        handler, HOST, PORT, limit=4096, reuse_port=True
+    )
+
+# this handler needs the while loop to keep opening for requests
+async def handler(reader, writer):
     while True:
-        c, _ = server_socket.accept()
-        threadPoolExecutor.submit(reply, c)
+        data = await reader.read(100)
+        # checks data stream so server doesn't crash and wait for data finish sending
+        if not data:
+            break
+
+        print("new connection accepted!")
+        writer.write(b"+PONG\r\n")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
