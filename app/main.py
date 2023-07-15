@@ -15,6 +15,9 @@ async def main():
         handler, HOST, PORT, limit=4096, reuse_port=True
     )
 
+    async with server:
+        await server.serve_forever()
+
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
     while True:
