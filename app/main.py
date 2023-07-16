@@ -64,8 +64,9 @@ def currentTimeMillis():
 
 def getCommand(message):
     key = message[0]
-    valueMap = STORAGE[message[0]]
+    valueMap = STORAGE[key]
     expireTimestamp = valueMap['expireTimestamp']
+    print('valueMap', valueMap)
     if expireTimestamp and currentTimeMillis > expireTimestamp:
         return None
 
