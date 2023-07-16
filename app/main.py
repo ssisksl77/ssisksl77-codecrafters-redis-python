@@ -59,10 +59,8 @@ def setCommand(message):
         # idx = message.index('px')
     if 'px' in message:
         idx = message.index('px')
-        print(message[idx] + ","+ message[idx+1])
-
         STORAGE[key] = {'value': value, 'expireTimestamp': currentTimeMillis() + int(message[idx+1])}
-        print('STORAGE', STORAGE)
+        # print('STORAGE', STORAGE)
     else:
         STORAGE[key] = {'value': value}
 
@@ -76,9 +74,13 @@ def getCommand(message):
     print('valueMap', valueMap)
 
     expireTimestamp = valueMap.get('expireTimestamp')
-    print(expireTimestamp)
-    if expireTimestamp is not None and currentTimeMillis() > expireTimestamp:
+    currentTimeMillis = currentTimeMillis()
+    print('cur=' + currentTimeMillis + ',exp=' + expireTimestamp)
+    
+    if expireTimestamp is not None and currentTimeMillis > expireTimestamp:
         return None
+
+
 
     return valueMap['value']
 
