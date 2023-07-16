@@ -33,16 +33,13 @@ def parse(input: str):
 
     # tokens = input.replace("\\r\\n", "\r\n").split("\r\n")
     tokens = input.split()
-    print("TOKENS: ", tokens)
+    # print("TOKENS: ", tokens)
 
     numberOfMessage = tokens[0][1]
-    print('numOfMessage', numberOfMessage)
-    
-    # 중요.
-    # data_type = DATA_TYPES.get(tokens[0][0])
+    # print('numOfMessage', numberOfMessage)
 
     command = tokens[2]
-    messages = tokens[3:]
+    messages = tokens[4:]
 
     return {
         "command": command,
@@ -76,7 +73,7 @@ async def handler(reader, writer):
             writer.write(bytes("+PONG\r\n", "utf-8"))
 
         elif command.lower() == "echo":
-            writer.write(bytes("+" + message, encoding="utf-8"))
+            writer.write(bytes("+" + message[0], encoding="utf-8"))
 
         elif command.lower() == "set":
             setCommand(**req)
