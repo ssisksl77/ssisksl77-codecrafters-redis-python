@@ -52,6 +52,10 @@ def parse(input: str):
     }
 
 
+def setCommand(command, tokens):
+    print('setcommand', command, tokens)
+
+
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
     while True:
@@ -72,6 +76,10 @@ async def handler(reader, writer):
 
         elif command.lower() == "echo":
             writer.write(bytes("+" + message, encoding="utf-8"))
+
+        elif command.lower() == "set":
+            setCommand(**req)
+            
 
 if __name__ == "__main__":
     asyncio.run(main())
