@@ -72,6 +72,7 @@ def getCommand(message):
 
     expireTimestamp = valueMap.get('expireTimestamp', None)
     _currentTimeMillis = currentTimeMillis()
+    print(_currentTimeMillis)
     # print('cur=' + currentTimeMillis + ',exp=' + expireTimestamp)
 
     # if expireTimestamp is not None and currentTimeMillis > expireTimestamp:
@@ -95,7 +96,6 @@ async def handler(reader, writer):
         command = req.get('command')
         tokens = req['tokens']
         message = req['message']
-        # print(req)
 
         if not command or not message or command.lower() == "ping":
             writer.write(bytes("+PONG\r\n", "utf-8"))
