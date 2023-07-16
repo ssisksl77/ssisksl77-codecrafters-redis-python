@@ -46,7 +46,7 @@ def parse(input: str):
     return {
         "command": command,
         "tokens": tokens,
-        "message": message
+        "message": messages
     }
 
 STORAGE = {}
