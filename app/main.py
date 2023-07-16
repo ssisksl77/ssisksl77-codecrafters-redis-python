@@ -52,6 +52,9 @@ def setCommand(message):
     value = message[1]
     print(message)
     STORAGE[key] = {'value': value}
+    if 'px' in message:
+        print('px is here')
+        idx = message.index('px')
     # if 'px' in message:
     #     idx = message.index('px')
     #     print(message[idx] + ","+ message[idx+1] + message[idx+2])
