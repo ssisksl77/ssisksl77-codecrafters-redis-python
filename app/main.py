@@ -38,8 +38,7 @@ def parse(input: str):
     # numberOfMessage = tokens[0][1]
 
     command = tokens[2]
-    messages = tokens[4:]
-    print(odd_index_elements(tokens[3:]))
+    messages = odd_index_elements(tokens[3:])
 
     return {
         "command": command,
