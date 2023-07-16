@@ -36,13 +36,17 @@ def parse(input: str):
     print("TOKENS: ", tokens)
 
     # 중요.
-    data_type = DATA_TYPES.get(tokens[0][0])
+    # data_type = DATA_TYPES.get(tokens[0][0])
     command_length = tokens[1][1:]  # $은 제거함.
 
     command = tokens[2]
     if len(tokens) > 4:
         message = tokens[4]
-    return command, message
+    return {
+        "command": command,
+        "tokens": tokens,
+        "message" : message
+    }
 
 
 # this handler needs the while loop to keep opening for requests
@@ -54,10 +58,15 @@ async def handler(reader, writer):
         if not data:
             break
 
-        command, message = parse(bytes(data).decode())
-
+        req = parse(bytes(data).decode())
+        command = req.get('command')
+        tokens = req['tokens']
+        message = req['message']
+        print(command, tokens, message)
+        
         if not command or not message or command.lower() == "ping":
             writer.write(bytes("+PONG\r\n", "utf-8"))
+
         elif command.lower() == "echo":
             writer.write(bytes("+" + message, encoding="utf-8"))
 
