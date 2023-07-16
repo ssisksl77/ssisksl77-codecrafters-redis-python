@@ -42,8 +42,7 @@ def parse(input: str):
     # data_type = DATA_TYPES.get(tokens[0][0])
 
     command = tokens[2]
-    if len(tokens) > 4:
-        message = tokens[4]
+    messages = tokens[3:]
 
     return {
         "command": command,
@@ -51,9 +50,11 @@ def parse(input: str):
         "message": message
     }
 
-
+STORAGE = {}
 def setCommand(command, tokens):
     print('setcommand', command, tokens)
+
+
 
 
 # this handler needs the while loop to keep opening for requests
@@ -79,7 +80,7 @@ async def handler(reader, writer):
 
         elif command.lower() == "set":
             setCommand(**req)
-            
+
 
 if __name__ == "__main__":
     asyncio.run(main())
