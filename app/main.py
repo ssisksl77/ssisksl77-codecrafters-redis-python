@@ -40,6 +40,8 @@ def parse(input: str):
 
     command = tokens[2]
     messages = tokens[4:]
+    for i in tokens[4:]:
+        print('messages', i)
 
     return {
         "command": command,
@@ -50,9 +52,6 @@ def parse(input: str):
 STORAGE = {}
 def setCommand(command, tokens):
     print('setcommand', command, tokens)
-
-
-
 
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
@@ -67,7 +66,7 @@ async def handler(reader, writer):
         command = req.get('command')
         tokens = req['tokens']
         message = req['message']
-        print(command, tokens, message)
+        print(req)
 
         if not command or not message or command.lower() == "ping":
             writer.write(bytes("+PONG\r\n", "utf-8"))
