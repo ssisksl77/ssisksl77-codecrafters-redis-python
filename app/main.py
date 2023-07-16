@@ -76,7 +76,7 @@ async def handler(reader, writer):
             writer.write(bytes("+" + ''.join(message), encoding="utf-8"))
 
         elif command.lower() == "set":
-            setCommand(**req)
+            setCommand(message)
             writer.write(b"+OK\r\n")
 
 
