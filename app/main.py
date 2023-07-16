@@ -52,7 +52,8 @@ def setCommand(message):
     STORAGE[message[0]] = message[1]
     print("STORAGE", STORAGE)
 
-
+def getCommand(message):
+    return STORAGE[message[0]]
 
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
@@ -78,6 +79,12 @@ async def handler(reader, writer):
         elif command.lower() == "set":
             setCommand(message)
             writer.write(b"+OK\r\n")
+        elif command.lower() == "get":
+            v = getCommand(message)
+            if v:
+                writer.write(bytes("+" + v + "\r\n", encoding="utf-8"))
+            else:
+                writer.write(bytes("-1\r\n", "utf-8"))
 
 
 if __name__ == "__main__":
