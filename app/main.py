@@ -55,6 +55,7 @@ def setCommand(message):
     if 'px' in message:
         print('px is here')
         print(message.index('px'))
+        print(message[message.index('px')+1])
         # idx = message.index('px')
     # if 'px' in message:
     #     idx = message.index('px')
