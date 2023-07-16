@@ -70,7 +70,7 @@ def getCommand(message):
     valueMap = STORAGE[key]
     print('valueMap', valueMap)
 
-    expireTimestamp = valueMap.get('expireTimestamp')
+    expireTimestamp = valueMap.get('expireTimestamp', None)
     currentTimeMillis = currentTimeMillis()
     print('cur=' + currentTimeMillis + ',exp=' + expireTimestamp)
 
