@@ -48,6 +48,7 @@ def parse(input: str):
 
 STORAGE = {}
 def setCommand(message):
+    print("SET COMMAND METHOD CALLED!")
     STORAGE[message[0]] = message[1]
     print("STORAGE", STORAGE)
 
