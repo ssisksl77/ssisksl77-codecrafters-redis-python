@@ -7,7 +7,7 @@ PORT = 6379
 HOST = "localhost"
 
 async def main():
-    print("Logs from your program will appear here!")
+    print("==================로그 보는 곳==========================")
 
     # use asyncio to start a socket server
     # # then call an async function to return PONG
