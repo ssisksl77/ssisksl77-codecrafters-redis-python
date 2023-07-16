@@ -75,8 +75,8 @@ def getCommand(message):
     print(_currentTimeMillis)
     # print('cur=' + currentTimeMillis + ',exp=' + expireTimestamp)
 
-    # if expireTimestamp is not None and currentTimeMillis > expireTimestamp:
-        # return None
+    if expireTimestamp is not None and _currentTimeMillis > expireTimestamp:
+        return None
 
 
 
