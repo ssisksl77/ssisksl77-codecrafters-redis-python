@@ -35,17 +35,20 @@ def parse(input: str):
     tokens = input.split()
     print("TOKENS: ", tokens)
 
+    numberOfMessage = tokens[0][1]
+    print('numOfMessage', numberOfMessage)
     # 중요.
     # data_type = DATA_TYPES.get(tokens[0][0])
+    
     command_length = tokens[1][1:]  # $은 제거함.
 
     command = tokens[2]
     if len(tokens) > 4:
         message = tokens[4]
+
     return {
         "command": command,
         "tokens": tokens,
-        "message" : message
     }
 
 
@@ -63,7 +66,7 @@ async def handler(reader, writer):
         tokens = req['tokens']
         message = req['message']
         print(command, tokens, message)
-        
+
         if not command or not message or command.lower() == "ping":
             writer.write(bytes("+PONG\r\n", "utf-8"))
 
