@@ -71,7 +71,7 @@ async def handler(reader, writer):
             writer.write(bytes("+PONG\r\n", "utf-8"))
 
         elif command.lower() == "echo":
-            writer.write(bytes("+" + message[0], encoding="utf-8"))
+            writer.write(bytes("+" + ''.join(message), encoding="utf-8"))
 
         elif command.lower() == "set":
             setCommand(**req)
