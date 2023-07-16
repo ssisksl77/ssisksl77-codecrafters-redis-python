@@ -37,12 +37,9 @@ def parse(input: str):
 
     numberOfMessage = tokens[0][1]
     print('numOfMessage', numberOfMessage)
+    
     # 중요.
     # data_type = DATA_TYPES.get(tokens[0][0])
-    
-
-    for i in range(numberOfMessage):
-        command_length = tokens[1][1:]  # $은 제거함.
 
     command = tokens[2]
     if len(tokens) > 4:
