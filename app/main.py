@@ -18,6 +18,9 @@ async def main():
     async with server:
         await server.serve_forever()
 
+def odd_index_elements(lst):
+    return [val for idx, val in enumerate(lst) if idx % 2 != 0]
+
 def parse(input: str):
     DATA_TYPES = dict(
         SIMPLE_STRING="+",
@@ -27,21 +30,16 @@ def parse(input: str):
         ARRAY="*"
     )
 
-    command, message = None, None
-    if not input or input[0] not in DATA_TYPES.values():
-        return command, message
+    # command, message = None, None
+    # if not input or input[0] not in DATA_TYPES.values():
+    #     return command, message
 
-    # tokens = input.replace("\\r\\n", "\r\n").split("\r\n")
     tokens = input.split()
-    # print("TOKENS: ", tokens)
-
-    numberOfMessage = tokens[0][1]
-    # print('numOfMessage', numberOfMessage)
+    # numberOfMessage = tokens[0][1]
 
     command = tokens[2]
     messages = tokens[4:]
-    for i in tokens[4:]:
-        print('messages', i)
+    print(odd_index_elements(tokens[3:]))
 
     return {
         "command": command,
@@ -50,8 +48,9 @@ def parse(input: str):
     }
 
 STORAGE = {}
-def setCommand(command, tokens):
+def setCommand(command, tokens, message):
     print('setcommand', command, tokens)
+
 
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
