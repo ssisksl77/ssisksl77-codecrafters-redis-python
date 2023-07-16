@@ -65,8 +65,9 @@ def getCommand(message):
     print('GET', message)
     key = message[0]
     valueMap = STORAGE[key]
-    expireTimestamp = valueMap['expireTimestamp']
     print('valueMap', valueMap)
+
+    expireTimestamp = valueMap['expireTimestamp']
     if expireTimestamp and currentTimeMillis > expireTimestamp:
         return None
 
