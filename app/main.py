@@ -107,7 +107,7 @@ async def handler(reader, writer):
             writer.write(b"+OK\r\n")
         elif command.lower() == "get":
             v = getCommand(message)
-            if v:
+            if v is not None:
                 writer.write(bytes("+" + v + "\r\n", encoding="utf-8"))
             else:
                 writer.write(bytes("-1\r\n", "utf-8"))
