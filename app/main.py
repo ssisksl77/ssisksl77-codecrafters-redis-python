@@ -110,7 +110,7 @@ async def handler(reader, writer):
             if v is not None:
                 writer.write(bytes("+" + v + "\r\n", encoding="utf-8"))
             else:
-                writer.write(bytes("-1\r\n", "utf-8"))
+                writer.write(bytes("$-1\r\n", "utf-8"))
 
 
 if __name__ == "__main__":
