@@ -1,7 +1,7 @@
 # Uncomment this to pass the first stage
 import socket
 import asyncio
-
+import time
 
 PORT = 6379
 HOST = "localhost"
@@ -49,11 +49,28 @@ def parse(input: str):
 STORAGE = {}
 def setCommand(message):
     print("SET COMMAND METHOD CALLED!")
-    STORAGE[message[0]] = message[1]
-    print("STORAGE", STORAGE)
+    key = message[0]
+    value = message[1]
+    if 'px' in message:
+        idx = message.index('px')
+        expireTimestamp = int((time.time() * 1000)) + int(message[idx+2])
+        STORAGE[key] = {'value': value, 'expireTimestamp': expireTimestamp}
+    else:
+        STORAGE[key] = {'value': value}
+
+
+def currentTimeMillis():
+    return int((time.time() * 1000))
 
 def getCommand(message):
-    return STORAGE[message[0]]
+    key = message[0]
+    valueMap = STORAGE[message[0]]
+    expireTimestamp = valueMap['expireTimestamp']
+    if expireTimestamp and currentTimeMillis > expireTimestamp:
+        return None
+
+    return valueMap['value']
+
 
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
