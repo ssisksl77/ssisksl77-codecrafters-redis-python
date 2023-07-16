@@ -46,6 +46,9 @@ def parse(input: str):
         "message": messages
     }
 
+def currentTimeMillis():
+    return int((time.time() * 1000))
+
 STORAGE = {}
 def setCommand(message):
     key = message[0]
@@ -65,8 +68,6 @@ def setCommand(message):
         STORAGE[key] = {'value': value}
 
 
-def currentTimeMillis():
-    return int(time.time() * 1000)
 
 def getCommand(message):
     key = message[0]
@@ -76,7 +77,7 @@ def getCommand(message):
     expireTimestamp = valueMap.get('expireTimestamp')
     currentTimeMillis = currentTimeMillis()
     print('cur=' + currentTimeMillis + ',exp=' + expireTimestamp)
-    
+
     if expireTimestamp is not None and currentTimeMillis > expireTimestamp:
         return None
 
