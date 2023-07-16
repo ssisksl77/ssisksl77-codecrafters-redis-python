@@ -48,7 +48,6 @@ def parse(input: str):
 
 STORAGE = {}
 def setCommand(message):
-    print("SET COMMAND METHOD CALLED!")
     key = message[0]
     value = message[1]
     if 'px' in message:
@@ -63,6 +62,7 @@ def currentTimeMillis():
     return int((time.time() * 1000))
 
 def getCommand(message):
+    print('GET', message)
     key = message[0]
     valueMap = STORAGE[key]
     expireTimestamp = valueMap['expireTimestamp']
