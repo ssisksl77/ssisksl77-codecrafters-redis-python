@@ -69,7 +69,7 @@ def getCommand(message):
 
     expireTimestamp = valueMap['expireTimestamp']
     print(expireTimestamp)
-    if expireTimestamp and currentTimeMillis() > expireTimestamp:
+    if expireTimestamp is not None and currentTimeMillis() > expireTimestamp:
         return None
 
     return valueMap['value']
