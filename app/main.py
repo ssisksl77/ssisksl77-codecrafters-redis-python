@@ -40,7 +40,9 @@ def parse(input: str):
     # 중요.
     # data_type = DATA_TYPES.get(tokens[0][0])
     
-    command_length = tokens[1][1:]  # $은 제거함.
+
+    for i in range(numberOfMessage):
+        command_length = tokens[1][1:]  # $은 제거함.
 
     command = tokens[2]
     if len(tokens) > 4:
@@ -49,6 +51,7 @@ def parse(input: str):
     return {
         "command": command,
         "tokens": tokens,
+        "message": message
     }
 
 
