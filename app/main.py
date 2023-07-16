@@ -53,8 +53,8 @@ def setCommand(message):
     if 'px' in message:
         idx = message.index('px')
         print(message[idx] + ","+ message[idx+1] + message[idx+2])
-        expireTimestamp = int(time.time() * 1000) + int(message[idx+2])
-        STORAGE[key] = {'value': value, 'expireTimestamp': expireTimestamp}
+        # expireTimestamp = int(time.time() * 1000) + int(message[idx+2])
+        STORAGE[key] = {'value': value, 'expireTimestamp': None}
         print('STORAGE', STORAGE)
     else:
         STORAGE[key] = {'value': value}
