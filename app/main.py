@@ -48,14 +48,16 @@ def parse(input: str):
     }
 
 STORAGE = {}
-def setCommand(command, tokens, message):
-    print('setcommand', command, tokens)
+def setCommand(message):
+    STORAGE[message[0]] = message[1]
+    print("STORAGE", STORAGE)
+
 
 
 # this handler needs the while loop to keep opening for requests
 async def handler(reader, writer):
     while True:
-        print("new connection accepted!")
+        # print("new connection accepted!")
         data = await reader.read(100)
         # checks data stream so server doesn't crash and wait for data finish sending
         if not data:
@@ -75,6 +77,7 @@ async def handler(reader, writer):
 
         elif command.lower() == "set":
             setCommand(**req)
+            writer.write(b"+OK\r\n")
 
 
 if __name__ == "__main__":
