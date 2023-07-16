@@ -50,21 +50,21 @@ STORAGE = {}
 def setCommand(message):
     key = message[0]
     value = message[1]
-    print(message)
-    STORAGE[key] = {'value': value}
-    if 'px' in message:
-        print('px is here')
-        print(message.index('px'))
-        print(message[message.index('px')+1])
-        # idx = message.index('px')
+    # print(message)
+    # STORAGE[key] = {'value': value}
     # if 'px' in message:
-    #     idx = message.index('px')
-    #     print(message[idx] + ","+ message[idx+1] + message[idx+2])
-    #     # expireTimestamp = int(time.time() * 1000) + int(message[idx+2])
-    #     STORAGE[key] = {'value': value, 'expireTimestamp': None}
-    #     print('STORAGE', STORAGE)
-    # else:
-    #     STORAGE[key] = {'value': value}
+    #     print('px is here')
+    #     print(message.index('px'))
+    #     print(message[message.index('px')+1])
+        # idx = message.index('px')
+    if 'px' in message:
+        idx = message.index('px')
+        print(message[idx] + ","+ message[idx+1] + message[idx+1])
+
+        STORAGE[key] = {'value': value, 'expireTimestamp': None}
+        print('STORAGE', STORAGE)
+    else:
+        STORAGE[key] = {'value': value}
 
 
 def currentTimeMillis():
