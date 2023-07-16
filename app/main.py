@@ -59,9 +59,9 @@ def setCommand(message):
         # idx = message.index('px')
     if 'px' in message:
         idx = message.index('px')
-        print(message[idx] + ","+ message[idx+1] + message[idx+1])
+        print(message[idx] + ","+ message[idx+1])
 
-        STORAGE[key] = {'value': value, 'expireTimestamp': None}
+        STORAGE[key] = {'value': value, 'expireTimestamp': currentTimeMillis() + int(message[idx+1])}
         print('STORAGE', STORAGE)
     else:
         STORAGE[key] = {'value': value}
@@ -71,7 +71,6 @@ def currentTimeMillis():
     return int(time.time() * 1000)
 
 def getCommand(message):
-    print('GET', message)
     key = message[0]
     valueMap = STORAGE[key]
     print('valueMap', valueMap)
